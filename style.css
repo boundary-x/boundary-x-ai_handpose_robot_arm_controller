@@ -1,0 +1,178 @@
+:root {
+  --primary: #000000;
+  --accent: #00E676; 
+  --danger: #FF1744;
+  --bg-color: #F0F2F5;
+  --sidebar-width: 320px;
+  --font-family: 'Pretendard', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
+
+body { 
+    height: 100dvh; 
+    display: flex; 
+    flex-direction: column; 
+    background: var(--bg-color); 
+    overflow: hidden; 
+}
+
+/* 헤더 */
+header { 
+    background: #000; 
+    color: #fff; 
+    height: 60px; 
+    padding: 0 2rem; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    flex-shrink: 0; 
+    z-index: 100; 
+}
+.title { font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+.title img { height: 24px; }
+.white-badge { background: #333; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; color: var(--accent); }
+.status-indicator { font-size: 0.85rem; padding: 4px 12px; border-radius: 20px; background: #333; color: #ccc; }
+.status-indicator.ready { background: var(--accent); color: #000; font-weight: 700; }
+
+/* 앱 메인 컨테이너 */
+.app-container { 
+    display: flex; 
+    flex: 1; 
+    height: calc(100dvh - 60px); 
+}
+
+/* [좌측] 사이드바 */
+.sidebar { 
+    width: var(--sidebar-width); 
+    background: #fff; 
+    border-right: 1px solid #ddd; 
+    padding: 1.5rem; 
+    padding-bottom: 4rem; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1.5rem; 
+    overflow-y: auto; 
+    flex-shrink: 0; 
+    z-index: 20;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+}
+
+.panel h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.8rem; color: #333; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+
+/* [추가] 사용 가이드 스타일 */
+.info-panel { background: #F0F4F8; padding: 1.2rem; border-radius: 12px; border: 1px solid #E1E8ED; }
+.manual-list { padding-left: 1.2rem; font-size: 0.9rem; color: #444; line-height: 1.5; }
+.manual-list > li { margin-bottom: 12px; }
+
+/* [추가] 서브 리스트 (제어 방법) */
+.sub-list { padding-left: 10px; margin-top: 5px; list-style: none; border-left: 2px solid #ddd; }
+.sub-list li { font-size: 0.85rem; margin-bottom: 3px; color: #555; }
+.sub-list b { color: #000; }
+
+/* [추가] Trim 설명 강조 */
+.trim-guide p { margin-top: 5px; font-size: 0.85rem; color: #666; background: #fff; padding: 8px; border-radius: 6px; border: 1px solid #eee; }
+.trim-guide b { color: var(--accent); }
+
+
+/* 버튼 스타일 */
+.btn-primary { width: 100%; padding: 14px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+.btn-primary:hover { background: #333; }
+.btn-secondary { width: 100%; padding: 14px; background: #fff; color: var(--danger); border: 1px solid #ddd; border-radius: 8px; font-weight: 700; cursor: pointer; }
+.hidden { display: none; }
+
+.status-box { background: #eee; padding: 12px; text-align: center; border-radius: 6px; font-size: 0.95rem; font-weight: 600; color: #555; margin-bottom: 10px; }
+.status-connected { background: #E6F4EA; color: var(--accent); }
+
+/* 게이지 바 스타일 */
+.gauge-row { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; margin-top: 12px; color: #555; }
+.gauge-bar { width: 100%; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+.gauge-bar div { height: 100%; background: var(--accent); transition: width 0.1s; }
+.badge-open { color: var(--accent); }
+.badge-close { color: #888; } 
+
+/* Trim(오차 보정) 패널 */
+.trim-panel { background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
+.slider-group { margin-bottom: 12px; }
+.slider-group label { display: block; font-size: 0.8rem; color: #666; margin-bottom: 6px; font-weight: 600; }
+input[type=range] { width: 100%; cursor: pointer; accent-color: var(--accent); }
+
+.debug-panel { margin-top: auto; font-size: 0.75rem; color: #999; }
+.debug-panel code { display: block; background: #222; color: #0f0; padding: 10px; border-radius: 4px; margin-top: 5px; font-family: monospace; text-align: center; }
+
+/* [우측] 메인 스테이지 */
+.stage { 
+    flex: 1; 
+    position: relative; 
+    background: #111; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
+}
+
+.canvas-wrapper { 
+    position: relative; 
+    width: 100%; 
+    height: 100%; 
+    max-width: 1280px; 
+    display: flex; 
+    justify-content: center; 
+}
+
+video { position: absolute; visibility: hidden; } 
+canvas { 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    z-index: 1; 
+}
+
+/* 오버레이 가이드 컨테이너 */
+.overlay-guide-container { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 10; 
+    pointer-events: none; 
+}
+
+.guide-text { 
+    position: absolute; 
+    color: rgba(255,255,255,0.6); 
+    font-weight: 700; 
+    font-size: 1rem; 
+    background: rgba(0,0,0,0.4); 
+    padding: 6px 14px; 
+    border-radius: 20px; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px; 
+}
+
+.top-left { top: 30px; left: 30px; }
+.bottom-right { bottom: 30px; right: 30px; }
+.bottom-left { bottom: 30px; left: 30px; }
+.center { top: 30px; left: 50%; transform: translateX(-50%); }
+
+.center-crosshair { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    width: 20px; 
+    height: 20px; 
+    border-left: 2px solid rgba(255,255,255,0.3); 
+    border-top: 2px solid rgba(255,255,255,0.3); 
+    transform: translate(-50%, -50%); 
+}
+
+/* 태블릿/모바일 반응형 */
+@media (max-width: 900px) {
+  .app-container { flex-direction: column; height: auto; }
+  .sidebar { width: 100%; height: auto; border-right: none; padding-bottom: 2rem; border-bottom: 1px solid #ddd; }
+  .stage { height: 60dvh; min-height: 400px; }
+}
