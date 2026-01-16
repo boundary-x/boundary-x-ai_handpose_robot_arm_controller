@@ -8,7 +8,7 @@ const UUID_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
 const UUID_RX = "6e400003-b5a3-f393-e0a9-e50e24dcca9e"; 
 
 // 스무딩 & 필터 설정
-const SMOOTHING = 0.2; 
+const SMOOTHING = 0.1; 
 const FILTER_SIZE = 3; 
 const MIN_CHANGE = 1.5; 
 
@@ -213,4 +213,5 @@ function onDisc() { isConnected = false; statusBt.innerText = "연결 해제됨"
 disconnectBtn.addEventListener('click', () => { if(bluetoothDevice && bluetoothDevice.gatt.connected) { bluetoothDevice.gatt.disconnect(); } });
 
 createHandLandmarker();
+
 
