@@ -17,11 +17,11 @@ const LIMITS = {
 
 // [수정 1] 더 부드럽게 설정 (0.15 -> 0.08)
 // 숫자가 작을수록 느리지만 훨씬 부드러워집니다.
-const SMOOTHING = 0.08; 
+const SMOOTHING = 0.1; 
 
 // [수정 2] 이동 평균 필터 크기 (최근 N개의 평균을 사용)
 // 5 정도가 적당하며, 높을수록 부드럽지만 반응이 느려집니다.
-const FILTER_SIZE = 5; 
+const FILTER_SIZE = 3; 
 
 // 득득거림 방지 (Deadband) - 1.5도로 약간 완화
 const MIN_CHANGE = 1.5; 
@@ -226,3 +226,4 @@ function onDisc() { isConnected = false; statusBt.innerText = "연결 해제됨"
 disconnectBtn.addEventListener('click', () => { if(bluetoothDevice && bluetoothDevice.gatt.connected) { bluetoothDevice.gatt.disconnect(); } });
 
 createHandLandmarker();
+
